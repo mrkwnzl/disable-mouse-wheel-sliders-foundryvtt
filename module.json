@@ -1,0 +1,14 @@
+{
+    "name": "disable-mouse-wheel-sliders",
+    "title": "Disable Mouse Wheel Control for Sliders",
+    "description": "Adds a client-side setting that disables mouse wheel control of sliders.",
+    "author": "Marko Wenzel",
+    "version": "1.0.0",
+    "minimumCoreVersion": "0.7.9",
+    "compatibleCoreVersion": "0.7.9",
+    "esmodules": ["/disable-mouse-wheel-sliders.js"],
+    "url": "",
+    "manifest": "",
+    "download": "",
+    "readme": ""
+}
