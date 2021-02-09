@@ -3,6 +3,7 @@
 ![GitHub Latest Release](https://img.shields.io/github/release/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt?style=flat-square)
 ![GitHub Downloads Latest](https://img.shields.io/github/downloads/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/latest/total?style=flat-square)
 ![GitHub All Releases](https://img.shields.io/github/downloads/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/total?style=flat-square)
+![Support](https://img.shields.io/badge/Support-Buy%20Me%20A%20Coffee-blue)
 
 This module adds a client-side setting that disables mouse wheel control of sliders in Foundry VTT. This helps when you tend to accidentally change the sliders in the various settings, and especially when you try to scroll though long playlists but change the volume of the tracks instead.
 
