@@ -7,6 +7,8 @@
 
 This module adds a client-side setting that disables mouse wheel control for sliders in Foundry VTT. This helps when you tend to accidentally change the sliders in the various settings, and especially when you try to scroll through long playlists but change the volume of the tracks instead.
 
+Note: It’s not enough to activate this module. You also have to enable the setting in the Module Settings in order for it to take effect. This is because as a client-side setting, that is every player can set it up to their personal preference, I thought it would be best to default to the default Foundry behavior.
+
 ## Support
 
 I appreciate any feedback and questions. You can reach me on [GitHub](https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt) and Discord (@mrkwnzl#7407). If Disable Mouse Wheel Control for Sliders in Foundry VTT makes your games more accessible and fun, I’m grateful for your support:
