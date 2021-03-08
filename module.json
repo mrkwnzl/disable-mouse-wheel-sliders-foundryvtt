@@ -1,7 +1,7 @@
 {
     "name": "disable-mouse-wheel-sliders",
     "title": "Disable Mouse Wheel Control for Sliders",
-    "description": "Adds a client-side setting that disables mouse wheel control of sliders.",
+    "description": "Adds a client-side setting that disables mouse wheel control of sliders and input fields.",
     "author": "Marko Wenzel",
     "version": "1.1.0",
     "minimumCoreVersion": "0.7.9",
