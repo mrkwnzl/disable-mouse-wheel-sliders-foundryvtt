@@ -36,7 +36,7 @@ Hooks.on("init", function () {
 
   // Override default Foundry function for sliders
   if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-sliders")) {
-    window._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
+    Game._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
   }
 
   // Override default HTML function for number inputs
