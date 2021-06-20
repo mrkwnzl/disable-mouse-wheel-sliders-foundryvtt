@@ -8,8 +8,9 @@ function _handleMouseWheelInputChange_Override(event) {
 
 function disableInputNumbers(event) {
   const r = event.target;
-  if(r.tagName === "INPUT" && r.type === "number"){
+  if (r.tagName === "INPUT" && r.type === "number") {
     r.blur();
+    return false;
   }
 }
 
@@ -41,6 +42,6 @@ Hooks.on("init", function () {
 
   // Override default HTML function for number inputs
   if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs")) {
-    document.addEventListener("mousewheel", disableInputNumbers);
+    window.addEventListener("wheel", disableInputNumbers);
   }
 });
