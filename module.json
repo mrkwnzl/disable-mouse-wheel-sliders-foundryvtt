@@ -5,7 +5,7 @@
     "author": "Marko Wenzel",
     "version": "1.1.4",
     "minimumCoreVersion": "0.8.5",
-    "compatibleCoreVersion": "0.8.7",
+    "compatibleCoreVersion": "0.8.8",
     "esmodules": ["/disable-mouse-wheel-sliders.js"],
     "url": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt",
     "manifest": "https://raw.githubusercontent.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/main/module.json",
