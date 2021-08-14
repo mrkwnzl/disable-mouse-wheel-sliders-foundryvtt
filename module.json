@@ -3,11 +3,11 @@
     "title": "Disable Mouse Wheel Control for Sliders",
     "description": "Adds a client-side setting that disables mouse wheel control of sliders and input fields.",
     "author": "Marko Wenzel",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "minimumCoreVersion": "0.8.5",
     "compatibleCoreVersion": "0.8.8",
     "esmodules": ["/disable-mouse-wheel-sliders.js"],
     "url": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt",
     "manifest": "https://raw.githubusercontent.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/main/module.json",
-    "download": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/releases/download/v1.1.4/release.zip"
+    "download": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/releases/download/v1.1.5/release.zip"
 }
