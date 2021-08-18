@@ -3,35 +3,26 @@
 * @param {WheelEvent} event    A Mouse Wheel scroll event
 */
 
-function getMetaKey() {
-  if (game.settings.get("disable-mouse-wheel-sliders", "metaKey") == "a") return true;
-  if (game.settings.get("disable-mouse-wheel-sliders", "metaKey") == "b") return event.altKey;
-  if (game.settings.get("disable-mouse-wheel-sliders", "metaKey") == "c") return event.ctrlKey || event.metaKey;
+let originalHandleMouseWheelInputChange;
+
+function useDefaultBehavior() {
+  switch (game.settings.get("disable-mouse-wheel-sliders", "metaKey")) {
+    case "a": return false;
+    case "b": return event.altKey;
+    case "c": return event.ctrlKey || event.metaKey;
+  }
 }
 
 function _handleMouseWheelInputChange_Override(event) {
-  let metaKey = getMetaKey();
-  if (!metaKey) {
+  if (!useDefaultBehavior()) {
     // implementation replaced with no-op to avoid scroll wheel changing slider values
   } else {
-    const r = event.target;
-    if ( (r.tagName !== "INPUT") || (r.type !== "range") || r.disabled ) return;
-    event.preventDefault();
-    event.stopPropagation();
-
-    // Adjust the range slider by the step size
-    const step = (parseFloat(r.step) || 1.0) * Math.sign(-1 * event.deltaY);
-    r.value = Math.clamped(parseFloat(r.value) + step, parseFloat(r.min), parseFloat(r.max));
-
-    // Dispatch a change event that can bubble upwards to the parent form
-    const ev = new Event("change", {bubbles: true});
-    r.dispatchEvent(ev);
+    originalHandleMouseWheelInputChange(event);
   }
 }
 
 function disableInputNumbers(event) {
-  let metaKey = getMetaKey();
-  if (!metaKey) {
+  if (!useDefaultBehavior()) {
     const r = event.target;
     if (r.tagName === "INPUT" && r.type === "number") {
       r.blur();
@@ -78,8 +69,9 @@ Hooks.on("init", function () {
 
   // Override default Foundry function for sliders
   if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-sliders")) {
+    originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
     Game._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
-  }
+  };
 
   // Override default HTML function for number inputs
   if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs")) {
