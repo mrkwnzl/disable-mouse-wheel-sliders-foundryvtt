@@ -39,7 +39,7 @@ Hooks.on("init", function () {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => location.reload(),
+    onChange: () => location.reload()
   });
 
   game.settings.register("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs", {
@@ -49,7 +49,7 @@ Hooks.on("init", function () {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => location.reload(),
+    onChange: () => location.reload()
   });
 
   game.settings.register("disable-mouse-wheel-sliders", "metaKey", {
@@ -63,8 +63,7 @@ Hooks.on("init", function () {
       "a": "none",
       "b": "alt/option",
       "c": "ctrl/cmd"
-    },
-    onChange: () => location.reload(),
+    }
   });
 
   // Override default Foundry function for sliders
