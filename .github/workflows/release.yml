@@ -12,3 +12,13 @@ jobs:
 
       # Create zip file
       - run: zip -r ./release.zip *
+
+       # Update release with zip file
+      - name: Update Release with Files
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: './release.zip'
+          omitDraftDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
