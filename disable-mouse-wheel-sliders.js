@@ -39,7 +39,7 @@ Hooks.on("init", function () {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => location.reload()
+    requiresReload: true
   });
 
   game.settings.register("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs", {
@@ -49,7 +49,7 @@ Hooks.on("init", function () {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => location.reload()
+    requiresReload: true
   });
 
   game.settings.register("disable-mouse-wheel-sliders", "metaKey", {
