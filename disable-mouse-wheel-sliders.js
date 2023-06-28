@@ -25,7 +25,13 @@ function disableInputNumbers(event) {
   if (!useDefaultBehavior()) {
     const r = event.target;
     if (r.tagName === "INPUT" && r.type === "number") {
+      let hadFocus = (document.activeElement === r);
       r.blur();
+      if (hadFocus) {
+        setTimeout(function () {
+          r.focus();
+        }, 0);
+      }
       return false;
     }
   }
