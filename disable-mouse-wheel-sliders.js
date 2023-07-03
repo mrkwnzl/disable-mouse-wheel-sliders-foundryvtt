@@ -9,14 +9,11 @@ const MODULEID = 'disable-mouse-wheel-sliders'
 // Store Foundry's original function for later use
 let originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
 
-function useDefaultBehavior(event) {
-  // Get if OS is Mac
-  // ! navigator.platform is deprecated, but navigator.userAgentData.platform is not supported in Firefox, Safari or HTTP
-  const isMacOS = (navigator?.userAgentData?.platform ?? navigator?.platform ?? '').toUpperCase().indexOf('MAC') >= 0;
-  const escapeKey = game.settings.get(MODULEID, "metaKey");
 
-  // If OS is Mac and escapeKey is set to ctrlKey
-  if (isMacOS && escapeKey === "ctrlKey" && event.metaKey) return true;
+function useDefaultBehavior(event) {
+  // If setting is ctrlKey, check if ctrl or meta key is pressed
+  // otherwise return escapeKey value
+  if (escapeKey === "ctrlKey" && ((event.ctrlKey) || (event.metaKey))) return true;
   else return event?.[escapeKey] ?? false;
 }
 
