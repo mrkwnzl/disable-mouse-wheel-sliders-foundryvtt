@@ -1,21 +1,12 @@
 {
 	"disable-mouse-wheel-sliders": {
 		"title": "Disable Mouse Wheel Control for Sliders",
-		"settings":{
+		"settings": {
 			"disable-mouse-wheel-sliders.name": "Disable Sliders",
 			"disable-mouse-wheel-sliders.hint": "This disables the mouse wheel control for all sliders (e.g. the volume controls in playlists) on this client.",
 			"disable-mouse-wheel-inputs.name": "Disable Inputs",
 			"disable-mouse-wheel-inputs.hint": "This disables the mouse wheel control for all input fields (e.g. grid units for tokens) on this client.",
-			"metaKey": {
-				"name": "Choose Escape Key",
-				"hint": "This defines an escape key. While holding this key, mouse wheel control for sliders and input fields is enabled.",
-				"choices": {
-					"none": "None",
-					"altKey": "Alt (⊞) / Option (⌘)",
-					"ctrlKey": "Ctrl (⊞) / Command (⌘)",
-					"metaKey": "Window (⊞) / Command (⌘) "
-				}
-			}
+			"modifierKey.name": "Escape Key"
 		}
 	}
 }

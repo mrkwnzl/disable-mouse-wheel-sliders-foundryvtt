@@ -4,26 +4,29 @@
 */
 
 // Define Module ID
-const MODULEID = 'disable-mouse-wheel-sliders'
+const MODULEID = 'disable-mouse-wheel-sliders';
 
 // Store Foundry's original function for later use
 let originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
 
-
-function useDefaultBehavior(event) {
-  // If setting is ctrlKey, check if ctrl or meta key is pressed
-  // otherwise return escapeKey value
-  if (escapeKey === "ctrlKey" && ((event.ctrlKey) || (event.metaKey))) return true;
-  else return event?.[escapeKey] ?? false;
+function useDefaultBehavior() {
+  let modifierIsDown = 0;
+  game.keybindings.get(MODULEID, "escape-key").forEach(element => {
+    console.log(window.keyboard.downKeys);
+    console.log(element);
+    if (window.keyboard.downKeys.has(element.key)) modifierIsDown++;
+  });
+  if (modifierIsDown > 0) return true;
+  else return false;
 }
 
 function _handleMouseWheelInputChange_Override(event) {
   // Get if Setting Satus
   const overrideDefaultBehavior = game.settings.get(MODULEID, "disable-mouse-wheel-sliders");
-  
+
   // If setting is off, or if setting is on but metaKey not pressed
-  if (overrideDefaultBehavior && !useDefaultBehavior(event)) return;
-  
+  if (overrideDefaultBehavior && !useDefaultBehavior()) return;
+
   // Run Fondrys original function
   originalHandleMouseWheelInputChange(event);
 }
@@ -53,7 +56,7 @@ Hooks.on("init", function () {
     config: true,
     default: false,
     type: Boolean,
-    requiresReload: false,
+    requiresReload: false
   });
 
   // Define Setting to Let user toggle if module should override inputs
@@ -74,36 +77,24 @@ Hooks.on("init", function () {
     }
   });
 
+  // Register keybindings
+  game.keybindings.register(MODULEID, "escape-key", {
+    name: `${MODULEID}.settings.modifierKey.name`,
+    editable: [
+      {
+        key: "AltLeft"
+      },
+      {
+        key: "AltRight"
+      }
+    ]
+  });
+
   // if setting is on, add Event listener to disable input numbers
   if (game.settings.get(MODULEID, "disable-mouse-wheel-inputs")) {
     window.addEventListener("wheel", disableInputNumbers);
   }
 
-  // Define Setting to Let user Choose Escape key for Mouse Wheel Evert
-  game.settings.register(MODULEID, "metaKey", {
-    name: `${MODULEID}.settings.metaKey.name`,
-    hint: `${MODULEID}.settings.metaKey.hint`,
-    scope: "client",
-    config: true,
-    default: "a",
-    type: String,
-    choices: {
-      "none": `${MODULEID}.settings.metaKey.choices.none`,
-      "altKey": `${MODULEID}.settings.metaKey.choices.altKey`,
-      "ctrlKey": `${MODULEID}.settings.metaKey.choices.ctrlKey`
-    }
-  });
-  
   // Override Foundrys original function
   Game._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
-
-  // Migrate Old Settings to new Settings
-  Hooks.once("ready", function () {
-    let oldSetting = game.settings.get(MODULEID, "metaKey");
-    if (['a', 'b', 'c'].includes(oldSetting)) {
-      if (oldSetting === 'a') game.settings.set(MODULEID, "metaKey", 'none');
-      else if (oldSetting === 'b') game.settings.set(MODULEID, "metaKey", 'altKey');
-      else if (oldSetting === 'c') game.settings.set(MODULEID, "metaKey", 'ctrlKey');
-    }
-  });
 });
