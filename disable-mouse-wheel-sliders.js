@@ -18,10 +18,10 @@ function _handleMouseWheelInputChange_Override(event) {
   // Get if Setting Satus
   const overrideDefaultBehavior = game.settings.get(MODULE_ID, "disable-mouse-wheel-sliders");
 
-  // If setting is off, or if setting is on but metaKey not pressed
+  // If setting is off, or if setting is on but escape key not pressed
   if (overrideDefaultBehavior && !useDefaultBehavior()) return;
 
-  // Run Fondrys original function
+  // Run Foundry’s original function
   originalHandleMouseWheelInputChange(event);
 }
 
@@ -81,12 +81,8 @@ Hooks.on("init", function () {
   game.keybindings.register(MODULE_ID, "escape-key", {
     name: `${MODULE_ID}.settings.modifierKey.name`,
     editable: [
-      {
-        key: "AltLeft"
-      },
-      {
-        key: "AltRight"
-      }
+      {key: "AltLeft"},
+      {key: "AltRight"}
     ]
   });
 
