@@ -6,7 +6,7 @@
 // Define Module ID
 const MODULE_ID = 'disable-mouse-wheel-sliders';
 
-// Store Foundry's original function for later use
+// Store Foundry's original input change function for later use
 let originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
 
 function useDefaultBehavior() {
