@@ -11,6 +11,10 @@ This module adds a client-side setting that disables mouse wheel controls for sl
 
 ## Support
 
-I appreciate any feedback and questions. You can reach me on [GitHub](https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt) and Discord (@mrkwnzl#7407). If Disable Mouse Wheel Control for Sliders in Foundry VTT makes your games more accessible and fun, I’m grateful for your support:
+I appreciate any feedback and questions. You can reach me on [GitHub](https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt) and Discord (@mrkwnzl). If Disable Mouse Wheel Control for Sliders in Foundry VTT makes your games more accessible and fun, I’m grateful for your support:
 
 <a href="https://www.buymeacoffee.com/mrkwnzl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height="40"></a>
+
+## Credits
+
+[Mouse0270](https://github.com/mouse0270/) ([E-Mail](rmcintosh@websitesbyfatdudes.com) | [Patreon](https://www.patreon.com/mouse0270) | [Ko-fi](https://ko-fi.com/mouse0270)) supplied code that removed the need to reload when the module settings are changed and that enables ctrl and cmd as the possible escape keys.

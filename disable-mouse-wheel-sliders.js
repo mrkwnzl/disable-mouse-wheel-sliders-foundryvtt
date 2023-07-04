@@ -3,83 +3,94 @@
 * @param {WheelEvent} event    A Mouse Wheel scroll event
 */
 
-let originalHandleMouseWheelInputChange;
+// Define Module ID
+const MODULE_ID = 'disable-mouse-wheel-sliders';
+
+// Store Foundry's original input change function for later use
+let originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
 
 function useDefaultBehavior() {
-  switch (game.settings.get("disable-mouse-wheel-sliders", "metaKey")) {
-    case "a": return false;
-    case "b": return event.altKey;
-    case "c": return event.ctrlKey || event.metaKey;
-  }
+  // Check if keybinding exists in window.keyboard.downKeys 
+  return game.keybindings.get(MODULE_ID, "escape-key").some(keys => window.keyboard.downKeys.has(keys.key));
 }
 
 function _handleMouseWheelInputChange_Override(event) {
-  if (!useDefaultBehavior()) {
-    // implementation replaced with no-op to avoid scroll wheel changing slider values
-  } else {
-    originalHandleMouseWheelInputChange(event);
-  }
+  // Get if Setting Satus
+  const overrideDefaultBehavior = game.settings.get(MODULE_ID, "disable-mouse-wheel-sliders");
+
+  // If setting is off, or if setting is on but escape key not pressed
+  if (overrideDefaultBehavior && !useDefaultBehavior()) return;
+
+  // Run Foundry’s original function
+  originalHandleMouseWheelInputChange(event);
 }
 
 function disableInputNumbers(event) {
-  if (!useDefaultBehavior()) {
-    const r = event.target;
-    if (r.tagName === "INPUT" && r.type === "number") {
-      let hadFocus = (document.activeElement === r);
-      r.blur();
-      if (hadFocus) {
-        setTimeout(function () {
-          r.focus();
-        }, 0);
-      }
-      return false;
-    }
-  }
+  // Only apply logic to input[type="number"]
+  if (event.target.tagName !== 'INPUT' || event.target.type !== "number") return;
+
+  // If override key is not pressed exit
+  if (!useDefaultBehavior(event)) return (event.preventDefault(), event.stopPropagation());
+
+  // Check if Override key is ctrlKey
+  if (!event.ctrlKey) return;
+
+  // User is using ctrlKey on input[type=number] use custom behavior
+  const input = event.target;
+
+  // Adjust numerical inputs when escaping
+  const step = (parseFloat(input.step) || 1.0) * Math.sign(-1 * event.deltaY);
+  input.value = Math.clamped(
+    parseFloat(input.value) + step,  // Current Value + Step
+    parseFloat(input.min !== '' ? input.min : (parseFloat(input.value) - step)), // If Min Exists, use it, else use Current Value - Step
+    parseFloat(input.max !== '' ? input.max : (parseFloat(input.value) + step)), // If Max Exists, use it, else use Current Value + Step
+  );
 }
 
 Hooks.on("init", function () {
-  game.settings.register("disable-mouse-wheel-sliders", "disable-mouse-wheel-sliders", {
-    name: "Disable Sliders",
-    hint: "This disables the mouse wheel control for all sliders (e.g. the volume controls in playlists) on this client.",
+  // Define Setting to Let user toggle if module should override sliders
+  game.settings.register(MODULE_ID, "disable-mouse-wheel-sliders", {
+    name: `${MODULE_ID}.settings.disable-mouse-wheel-sliders.name`,
+    hint: `${MODULE_ID}.settings.disable-mouse-wheel-sliders.hint`,
     scope: "client",
     config: true,
     default: false,
     type: Boolean,
-    requiresReload: true
+    requiresReload: false
   });
 
-  game.settings.register("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs", {
-    name: "Disable Inputs",
-    hint: "This disables the mouse wheel control for all input fields (e.g. grid units for tokens) on this client.",
+  // Define Setting to Let user toggle if module should override inputs
+  game.settings.register(MODULE_ID, "disable-mouse-wheel-inputs", {
+    name: `${MODULE_ID}.settings.disable-mouse-wheel-inputs.name`,
+    hint: `${MODULE_ID}.settings.disable-mouse-wheel-inputs.hint`,
     scope: "client",
     config: true,
     default: false,
     type: Boolean,
-    requiresReload: true
-  });
-
-  game.settings.register("disable-mouse-wheel-sliders", "metaKey", {
-    name: "Choose Escape Key",
-    hint: "This defines an escape key. While holding this key, mouse wheel control for sliders and input fields is enabled.",
-    scope: "client",
-    config: true,
-    default: "a",
-    type: String,
-    choices: {
-      "a": "none",
-      "b": "alt/option",
-      "c": "ctrl/cmd"
+    requiresReload: false,
+    // When user changes setting, add or remove Event listener to disable input numbers
+    onChange: (value) => {
+      // If enabled, add Event Listener
+      if (value) window.addEventListener("wheel", disableInputNumbers, {passive: false});
+      // If false, remove Event Listener
+      else window.removeEventListener("wheel", disableInputNumbers);
     }
   });
 
-  // Override default Foundry function for sliders
-  if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-sliders")) {
-    originalHandleMouseWheelInputChange = Game._handleMouseWheelInputChange;
-    Game._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
-  };
+  // Register keybindings
+  game.keybindings.register(MODULE_ID, "escape-key", {
+    name: `${MODULE_ID}.settings.modifierKey.name`,
+    editable: [
+      {key: "AltLeft"},
+      {key: "AltRight"}
+    ]
+  });
 
-  // Override default HTML function for number inputs
-  if (game.settings.get("disable-mouse-wheel-sliders", "disable-mouse-wheel-inputs")) {
-    window.addEventListener("wheel", disableInputNumbers);
+  // if setting is on, add Event listener to disable input numbers
+  if (game.settings.get(MODULE_ID, "disable-mouse-wheel-inputs")) {
+    window.addEventListener("wheel", disableInputNumbers, {passive: false});
   }
+
+  // Override Foundrys original function
+  Game._handleMouseWheelInputChange = _handleMouseWheelInputChange_Override;
 });
