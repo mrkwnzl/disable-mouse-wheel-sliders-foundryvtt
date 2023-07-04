@@ -2,42 +2,34 @@
   "id": "disable-mouse-wheel-sliders",
   "title": "Disable Mouse Wheel Control for Sliders",
   "description": "Adds a client-side setting that disables mouse wheel control of sliders and input fields.",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "esmodules": [
     "/disable-mouse-wheel-sliders.js"
   ],
   "url": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt",
   "manifest": "https://raw.githubusercontent.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/main/module.json",
-  "download": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/releases/download/v1.3.0/release.zip",
+  "download": "https://github.com/mrkwnzl/disable-mouse-wheel-sliders-foundryvtt/releases/download/v2.0.0/release.zip",
   "authors": [
     {
       "name": "Marko Wenzel",
       "flags": {}
-    }, {
-			"name": "Mouse0270",
-			"url": "https://github.com/mouse0270/",
-			"email": "rmcintosh@websitesbyfatdudes.com",
-			"discord": "Mouse0270#0270",
-
-			"flags": {
-				"twitter": "Mouse0270",
-				"patreon": "Mouse0270",
-				"github": "Mouse0270",
-				"ko-fi": "Mouse0270",
-				"reddit": "u/Mouse0270"
-			}
-		}
+    }
   ],
   "compatibility": {
     "minimum": "0.8.5",
     "verified": "11",
     "maximum": "11"
   },
-	"languages": [
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "languages/en.json"
-		}
-	]
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "languages/de.json"
+    }
+  ]
 }

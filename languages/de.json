@@ -1,0 +1,12 @@
+{
+	"disable-mouse-wheel-sliders": {
+		"title": "Disable Mouse Wheel Control for Sliders",
+		"settings": {
+			"disable-mouse-wheel-sliders.name": "Schieberegler deaktivieren",
+			"disable-mouse-wheel-sliders.hint": "Dies deaktiviert die Mausradkontrolle für Schieberegler.",
+			"disable-mouse-wheel-inputs.name": "Inputs deaktivieren",
+			"disable-mouse-wheel-inputs.hint": "Dies deaktiviert die Mausradkontrolle für numerische Inputfelder.",
+			"modifierKey.name": "Escape Taste"
+		}
+	}
+}
