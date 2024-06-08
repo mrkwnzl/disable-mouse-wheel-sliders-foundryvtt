@@ -1,0 +1,12 @@
+{
+	"disable-mouse-wheel-sliders": {
+		"title": "Disable Mouse Wheel Control for Sliders",
+		"settings": {
+			"disable-mouse-wheel-sliders.name": "Deshabilitar las barras deslizadoras",
+			"disable-mouse-wheel-sliders.hint": "Esto deshabilita la rueda del ratón en todas las barras deslizadores (p.e. en el control del volumen de las listas de reproducción) para este cliente.",
+			"disable-mouse-wheel-inputs.name": "Deshabilitar en las cajas de introducción texto",
+			"disable-mouse-wheel-inputs.hint": "Esto deshabilita la rueda del ratón en todas las cajas introducción de texto (p.e. en el tamaño de un token en el grid) para este cliente.",
+			"modifierKey.name": "Tecla de Escape Key"
+		}
+	}
+}
